@@ -36,9 +36,8 @@ public class Visualizer extends JFrame {
 
         final CategoryPlot plot = (CategoryPlot) chart.getPlot();
         DateAxis range = (DateAxis) plot.getRangeAxis();
-        range.setDateFormatOverride(new SimpleDateFormat("SSSS"));
+        range.setDateFormatOverride(new SimpleDateFormat("sSSS"));
         range.setMaximumDate(new Date(makespan));
-        System.out.println(new Date(makespan).getTime());
 
     // add the chart to a panel...
         final ChartPanel chartPanel = new ChartPanel(chart);

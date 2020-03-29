@@ -137,10 +137,5 @@ public class Scheduler {
     public static void printTask(Task task, int currentJob, int currentMachine){
         System.out.println("[Job:Machine]" + "[" + currentJob + ":" + currentMachine + "]" + "[Start:End]" + "[" + task.getDuration().getStart().getTime() + ":" + task.getDuration().getEnd().getTime() + "]");
     }
-
-
-
-
-
 }
 

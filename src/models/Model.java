@@ -61,29 +61,33 @@ public class Model {
                 return ants;
         }
 
-        public void setAlpha(double alpha){
+        public void setAlpha(double alpha) {
                 this.alpha = alpha;
         }
 
-        public void setbeta(double beta){
+        public void setbeta(double beta) {
                 this.beta = beta;
         }
 
-        public double getAlpha(){
+        public double getAlpha() {
                 return this.alpha;
         }
 
-        public double getbeta(){
+        public double getbeta() {
                 return this.beta;
         }
 
-        public void generatePheromoneMatix(){
-                this.pheromoneMatrix = new double[jobs*machines+1][jobs*machines+1];
-                for (int i=0; i<this.pheromoneMatrix.length; i++){
-                        for(int j=0; j<this.pheromoneMatrix[0].length; j++){
-                                this.pheromoneMatrix[i][j] = 420.69;
+        public void generatePheromoneMatix(double initialValue) {
+                this.pheromoneMatrix = new double[jobs * machines + 1][jobs * machines + 1];
+                for (int i = 0; i < this.pheromoneMatrix.length; i++) {
+                        for (int j = 0; j < this.pheromoneMatrix[0].length; j++) {
+                                this.pheromoneMatrix[i][j] = initialValue;
                         }
                 }
+        }
+
+        public double[][] getPheromoneMatix(){
+                return this.pheromoneMatrix;
         }
 
 }
