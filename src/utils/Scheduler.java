@@ -17,7 +17,6 @@ public class Scheduler {
 
 
     public int calculateMakespan(List<Integer> operationOrder){
-        System.out.println(operationOrder);
         List<Integer> indices = new ArrayList<Integer>();
         List<Integer> nextAvailableMachineTime = new ArrayList<Integer>();
         List<Integer> currentJobLength = new ArrayList<Integer>();
@@ -48,8 +47,6 @@ public class Scheduler {
 
 
         }
-        System.out.println(currentJobLength);
-        System.out.println(indices);
         return Collections.max(currentJobLength);
     }
 
@@ -121,13 +118,13 @@ public class Scheduler {
 
             if(nextAvailableMachineTime.get(currentMachine) >= currentJobLength.get(currentJob)){
                 series1.get(currentMachine).addSubtask(new Task(""+currentJob, new SimpleTimePeriod(nextAvailableMachineTime.get(currentMachine), nextAvailableMachineTime.get(currentMachine)+currentProcedureLength)));
-                printTask(new Task(""+currentJob, new SimpleTimePeriod(nextAvailableMachineTime.get(currentMachine), nextAvailableMachineTime.get(currentMachine)+currentProcedureLength)), currentJob, currentMachine);
+                //printTask(new Task(""+currentJob, new SimpleTimePeriod(nextAvailableMachineTime.get(currentMachine), nextAvailableMachineTime.get(currentMachine)+currentProcedureLength)), currentJob, currentMachine);
                 nextAvailableMachineTime.set(currentMachine, nextAvailableMachineTime.get(currentMachine)+currentProcedureLength);
                 currentJobLength.set(currentJob, nextAvailableMachineTime.get(currentMachine)+currentProcedureLength);
             }
             else{
                 series1.get(currentMachine).addSubtask(new Task(""+currentJob, new SimpleTimePeriod(currentJobLength.get(currentJob), currentJobLength.get(currentJob)+currentProcedureLength)));
-                printTask(new Task(""+currentJob, new SimpleTimePeriod(nextAvailableMachineTime.get(currentMachine), nextAvailableMachineTime.get(currentMachine)+currentProcedureLength)), currentJob, currentMachine);
+                //printTask(new Task(""+currentJob, new SimpleTimePeriod(nextAvailableMachineTime.get(currentMachine), nextAvailableMachineTime.get(currentMachine)+currentProcedureLength)), currentJob, currentMachine);
                 nextAvailableMachineTime.set(currentMachine, currentJobLength.get(currentJob)+currentProcedureLength);
                 currentJobLength.set(currentJob, currentJobLength.get(currentJob)+currentProcedureLength);
             }

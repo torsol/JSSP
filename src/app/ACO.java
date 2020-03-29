@@ -15,7 +15,7 @@ public class ACO {
     public static void main(String[] args) throws Exception {
         IOManager manager = new IOManager();
         Model model = new Model();
-        manager.parseFile("test_data/1.txt", model);
+        manager.parseFile("test_data/2.txt", model);
         model.generateJobObjects();
         Scheduler scheduler = new Scheduler();
 
