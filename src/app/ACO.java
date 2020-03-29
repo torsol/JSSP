@@ -7,6 +7,9 @@ import models.Ant;
 import models.Model;
 import utils.IOManager;
 import utils.Scheduler;
+import utils.Visualizer;
+import org.jfree.ui.RefineryUtilities;
+
 
 public class ACO {
     public static void main(String[] args) throws Exception {
@@ -50,7 +53,12 @@ public class ACO {
             }
             iterationCount ++;
         }
+
         System.out.println(shortestLength);
         System.out.println(bestSolution);
+        Visualizer visualizer = new Visualizer("ACO Gantt", bestSolution, shortestLength, 6);
+        visualizer.pack();
+        RefineryUtilities.centerFrameOnScreen(visualizer);
+        visualizer.setVisible(true);
     }
 }
