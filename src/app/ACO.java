@@ -1,6 +1,7 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.jfree.ui.RefineryUtilities;
@@ -20,12 +21,12 @@ public class ACO {
         Scheduler scheduler = new Scheduler();
 
         // variables
-        int maxIterations = 100;
-        int antAmount = 100;
+        int maxIterations = 10000;
+        int antAmount = 30;
         double alpha = 0.1;
-        double beta = 0.1;
+        double beta = 0.5;
         double pheromoneInitialValue = 0.5;
-        double evaporation = 0.1;
+        double evaporation = 0.005;
 
         model.setAlpha(alpha);
         model.setbeta(beta);
@@ -56,6 +57,7 @@ public class ACO {
                 if (antCurrentMakespan < globalShortestLength) {
                     globalShortestLength = antCurrentMakespan;
                     globalBestSolution = ant.scheduledOperations;
+                    System.out.println("Iteration " + iterationCount + " new global found = " + antCurrentMakespan);
                 }
                 if (antCurrentMakespan < localShortestLength) {
                     localShortestLength = antCurrentMakespan;
@@ -65,11 +67,14 @@ public class ACO {
 
             updatePheromoneMatrix(localBestSolution, localShortestLength, globalShortestLength, model, evaporation);
 
+            //System.out.println("Iteration: " + iterationCount + "/" + maxIterations);
             iterationCount++;
+
         }
 
         System.out.println(globalShortestLength);
         System.out.println(globalBestSolution);
+        //System.out.println(Arrays.deepToString(model.getPheromoneMatix()));
         Visualizer visualizer = new Visualizer("ACO Gantt", globalBestSolution, globalShortestLength, 6);
         visualizer.pack();
         RefineryUtilities.centerFrameOnScreen(visualizer);
@@ -85,6 +90,20 @@ public class ACO {
             }
 
         }
+        // We always start in the zero-node
+        int currentIndex = 0;
+        int nextIndex;
 
+        List<Integer> indices = new ArrayList<Integer>();
+        for(int i=0; i<Model.technicalMatrix.length; i++){
+            indices.add(-1);
+        }
+
+        for (int currentJob: bestSolution){
+           indices.set(currentJob, indices.get(currentJob)+1);
+           nextIndex = Ant.getIndexOnRowCol(currentJob, indices.get(currentJob));
+           pheromoneMatrix[currentIndex][nextIndex] = pheromoneMatrix[currentIndex][nextIndex] + 1/(double) makespan;
+           currentIndex = nextIndex;
+        }
     }
 }

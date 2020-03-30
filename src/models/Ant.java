@@ -73,7 +73,7 @@ public class Ant {
         return Math.pow(pheromone, alpha) * Math.pow(1 / duration, beta);
     }
 
-    private int getIndexOnRowCol(int job, int operation) {
+    public static int getIndexOnRowCol(int job, int operation) {
         if (job == -1)
             return 0;
         return (job * (Model.processingMatrix.length) + operation) + 1;
