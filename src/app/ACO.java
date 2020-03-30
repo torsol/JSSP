@@ -3,6 +3,8 @@ package app;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.jfree.ui.RefineryUtilities;
 
@@ -16,7 +18,7 @@ public class ACO {
     public static void main(String[] args) throws Exception {
         IOManager manager = new IOManager();
         Model model = new Model();
-        manager.parseFile("test_data/2.txt", model);
+        manager.parseFile("test_data/4.txt", model);
         model.generateJobObjects();
         Scheduler scheduler = new Scheduler();
 
@@ -30,7 +32,7 @@ public class ACO {
         boolean earlyStopping = true;
         //int threshold = 62; //1.txt 56  62.72
         int threshold = 1186; //2.txt 1059  1186.08
-        //int threshold = 1276; //2.txt 1276 1429.12
+        //int threshold = 1276; //3.txt 1276 1429.12
         int printEveryIteration = 100;
 
         model.setAlpha(alpha);
@@ -47,6 +49,8 @@ public class ACO {
         int antCurrentMakespan;
 
         List<Ant> ants = new ArrayList<Ant>();
+
+        final ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
         while (iterationCount < maxIterations) {
 
