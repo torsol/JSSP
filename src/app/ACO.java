@@ -16,17 +16,22 @@ public class ACO {
     public static void main(String[] args) throws Exception {
         IOManager manager = new IOManager();
         Model model = new Model();
-        manager.parseFile("test_data/1.txt", model);
+        manager.parseFile("test_data/2.txt", model);
         model.generateJobObjects();
         Scheduler scheduler = new Scheduler();
 
         // variables
-        int maxIterations = 10000;
-        int antAmount = 30;
-        double alpha = 0.1;
-        double beta = 0.5;
+        int maxIterations = 2000;
+        int antAmount = 40;
+        double alpha = 0.01;
+        double beta = 0.01;
         double pheromoneInitialValue = 0.5;
-        double evaporation = 0.005;
+        double evaporation = 0.01;
+        boolean earlyStopping = true;
+        //int threshold = 62; //1.txt 56  62.72
+        int threshold = 1186; //2.txt 1059  1186.08
+        //int threshold = 1276; //2.txt 1276 1429.12
+        int printEveryIteration = 100;
 
         model.setAlpha(alpha);
         model.setbeta(beta);
@@ -57,6 +62,11 @@ public class ACO {
                 if (antCurrentMakespan < globalShortestLength) {
                     globalShortestLength = antCurrentMakespan;
                     globalBestSolution = ant.scheduledOperations;
+                    //System.out.println("Iteration " + iterationCount + " new global found = " + antCurrentMakespan);
+                }
+                if (antCurrentMakespan <= globalShortestLength) {
+                    globalShortestLength = antCurrentMakespan;
+                    globalBestSolution = ant.scheduledOperations;
                     System.out.println("Iteration " + iterationCount + " new global found = " + antCurrentMakespan);
                 }
                 if (antCurrentMakespan < localShortestLength) {
@@ -65,17 +75,30 @@ public class ACO {
                 }
             }
 
+            //Early stopping
+
+            if(globalShortestLength<=threshold && earlyStopping){
+                System.out.println("Stoppped early at iteration " + iterationCount + " with makespan = " + globalShortestLength);
+                break;
+            }
+
+
+
             updatePheromoneMatrix(localBestSolution, localShortestLength, globalShortestLength, model, evaporation);
 
-            //System.out.println("Iteration: " + iterationCount + "/" + maxIterations);
             iterationCount++;
 
-        }
+            if(iterationCount%printEveryIteration==0){
+                System.out.println("Iteration: " + iterationCount + "/" + maxIterations);
+            }
 
+        }
+        //globalBestSolution = Arrays.asList(1, 2, 0, 2, 0, 3, 1, 2, 3, 5, 4, 1, 0, 5, 2, 5, 4, 3, 4, 2, 3, 1, 5, 0, 3, 1, 2, 0, 4, 5, 3, 4, 1, 5, 0, 4);
+        //globalShortestLength = scheduler.calculateMakespan(globalBestSolution);
         System.out.println(globalShortestLength);
         System.out.println(globalBestSolution);
         //System.out.println(Arrays.deepToString(model.getPheromoneMatix()));
-        Visualizer visualizer = new Visualizer("ACO Gantt", globalBestSolution, globalShortestLength, 6);
+        Visualizer visualizer = new Visualizer("ACO Gantt", globalBestSolution, globalShortestLength, model.getJobs());
         visualizer.pack();
         RefineryUtilities.centerFrameOnScreen(visualizer);
         visualizer.setVisible(true);

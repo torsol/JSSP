@@ -90,4 +90,8 @@ public class Model {
                 return this.pheromoneMatrix;
         }
 
+        public int getJobs(){
+                return this.jobs;
+        }
+
 }

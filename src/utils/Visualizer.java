@@ -63,7 +63,7 @@ public class Visualizer extends JFrame {
     // https://stackoverflow.com/questions/8938690/code-for-changing-the-color-of-subtasks-in-gantt-chart/8949913#8949913
     private static class MyRenderer extends GanttRenderer {
         private static final int PASS = 2; // Assumes two passes. Unsure what the fuck it does
-        private final Color[] colorList = getUniqueColors(Model.processingMatrix[0].length);
+        private final Color[] colorList = getUniqueColors(Model.processingMatrix.length);
         private final List<Color> clut = new ArrayList<>();
         private final TaskSeriesCollection model;
         private int row;

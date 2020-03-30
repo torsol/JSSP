@@ -76,7 +76,7 @@ public class Ant {
     public static int getIndexOnRowCol(int job, int operation) {
         if (job == -1)
             return 0;
-        return (job * (Model.processingMatrix.length) + operation) + 1;
+        return (job * (Model.processingMatrix[0].length) + operation) + 1;
     }
 
     public Node pickNode(List<Node> nodes) {
