@@ -39,6 +39,9 @@ public class IOManager{
         }
         model.setTechnicalMatrix(technicalMatrix);
         model.setProcessingMatrix(processingMatrix);
+
+        
+
         scan.close();
         
     }
