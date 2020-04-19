@@ -17,7 +17,7 @@ public class ACO {
     public static void main(String[] args) throws Exception {
         IOManager manager = new IOManager();
         Model model = new Model();
-        manager.parseFile("test_data/2.txt", model);
+        manager.parseFile("test_data/7.txt", model);
         model.generateJobObjects();
         Scheduler scheduler = new Scheduler();
 
@@ -30,12 +30,12 @@ public class ACO {
         double evaporation = 0.01;
         boolean earlyStopping = true;
         //int threshold = 62; //1.txt 56  62.72
-        int threshold = 1186; //2.txt 1059  1186.08 //TODO NOT ACHEIVED
-        //int threshold = 1429; //3.txt 1276 1429.10 //TODO NOT ACHEIVED
-        //int threshold = 1265; //4.txt 1130 1265.60 //TODO NOT ACHEIVED
-        //int threshold = 1625; //5.txt 1451 1625.12 //TODO NOT ACHEIVED
-        //int threshold = 1927; //6.txt 1721 1927.52  //TODO NOT ACHEIVED
-        //int threshold = 1094; //7.txt 977 1094.24   //TODO NOT ACHEIVED
+        //int threshold = 1186; //2.txt 1059  1186.08 //TODO NOT ACHEIVED: 1243 1.5p
+        //int threshold = 1429; //3.txt 1276 1429.10 //TODO NOT ACHEIVED: 1519 1.5p
+        //int threshold = 1265; //4.txt 1130 1265.60 //TODO NOT ACHEIVED: 1333 1.5p
+        //int threshold = 1625; //5.txt 1451 1625.12 //TODO NOT ACHEIVED: 1919 0.0p
+        //int threshold = 1927; //6.txt 1721 1927.52  //TODO NOT ACHEIVED: 2551 0.0p
+        int threshold = 1094; //7.txt 977 1094.24   //TODO NOT ACHEIVED: 1417 0.0p
         
         int printEveryIteration = 100;
 

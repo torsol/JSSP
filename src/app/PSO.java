@@ -14,13 +14,13 @@ public class PSO {
     public static void main(String[] args) throws Exception {
         IOManager manager = new IOManager();
         Model model = new Model();
-        manager.parseFile("test_data/5.txt", model);
+        manager.parseFile("test_data/7.txt", model);
         model.generateJobObjects();
         Scheduler scheduler = new Scheduler();
 
         // variables
-        int maxIterations = 2000;
-        int birdAmount = 500;
+        int maxIterations = 1000;
+        int birdAmount = 1000;
         double positionLowerBound = 0.0;
         double positionUpperBound = 1.0;
         double velocityLowerBound = -1.0;
@@ -36,9 +36,9 @@ public class PSO {
         //int threshold = 1186; //2.txt 1059  1186.08
         //int threshold = 1429; //3.txt 1276 1429.10
         //int threshold = 1265; //4.txt 1130 1265.60
-        int threshold = 1625; //5.txt 1451 1625.12 //TODO NOT ACHEIVED: 1632
-        //int threshold = 1927; //6.txt 1721 1927.52  //TODO NOT ACHEIVED
-        //int threshold = 1094; //7.txt 977 1094.24   //TODO NOT ACHEIVED
+        //int threshold = 1625; //5.txt 1451 1625.12 (1000/1000/0.9)
+        //int threshold = 1927; //6.txt 1721 1927.52  //TODO NOT ACHEIVED: 2220 1.5p
+        int threshold = 1094; //7.txt 977 1094.24   //TODO NOT ACHEIVED 1180 1.5p
 
         // Generate birds
         List<Bird> birds = model.generateBirds(birdAmount);
