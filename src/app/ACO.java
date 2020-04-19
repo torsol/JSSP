@@ -2,8 +2,6 @@ package app;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.jfree.ui.RefineryUtilities;
 
@@ -22,10 +20,10 @@ public class ACO {
         Scheduler scheduler = new Scheduler();
 
         // variables
-        int maxIterations = 2000;
+        int maxIterations = 3000;
         int antAmount = 40;
         double alpha = 0.01;
-        double beta = 0.01;
+        double beta = 0.05;
         double evaporation = 0.01;
         boolean earlyStopping = true;
         //int threshold = 62; //1.txt 56  62.72

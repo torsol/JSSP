@@ -3,6 +3,8 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Schedule;
+
 public class Ant {
 
     double[][] pheromoneMatrix;
@@ -10,6 +12,7 @@ public class Ant {
     List<Job> jobs;
     double alpha;
     double beta;
+    Schedule schedule;
 
     // initial start node
     Node current;
@@ -20,6 +23,7 @@ public class Ant {
         this.alpha = alpha;
         this.beta = beta;
         this.current = new Node(-1, -1, -1, -1);
+        this.schedule = new Schedule();
     }
 
     public void findRoute() {
@@ -34,6 +38,7 @@ public class Ant {
 
             scheduledOperations.add(chosen.job);
             jobs.get(chosen.job).advance();
+            schedule.addOperationFromJob(chosen.job);
 
             this.current = chosen;
             availableNodes = getAvailableNodes();
@@ -68,9 +73,10 @@ public class Ant {
         double pheromone = pheromoneMatrix[currentIndex][nextIndex];
 
         // get duration for the next node
-        double duration = (double) next.duration;
+        // instead of getting the duration for the next node, get total makespan for this node
+        double makespan = schedule.newPossibleMakespan(next.job);
 
-        return Math.pow(pheromone, alpha) * Math.pow(1 / duration, beta);
+        return Math.pow(pheromone, alpha) * Math.pow(1 / makespan, beta);
     }
 
     public static int getIndexOnRowCol(int job, int operation) {
