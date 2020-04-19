@@ -18,3 +18,9 @@ Key words: swarm, birds
 Goals:
 1 common solution-representation [Feasible sequence der der altså]
 1 common scheduler/Gantt-printer
+
+jfreechart 1.0.9
+jcommon 1.0.16
+$ Optimeringsmessig
+- swappe operasjoner i blokker, funnet av de kritiske stiene
+- forandre selection heuristicen til å være totalt makespan, ikke bare duration
