@@ -31,13 +31,13 @@ public class PSO {
         int iterationCount = 0;
         int printEveryIteration = 1;
 
-        boolean earlyStopping = true;
+        boolean earlyStopping = false;
         //int threshold = 62; //1.txt 56  62.72
         //int threshold = 1186; //2.txt 1059  1186.08
         //int threshold = 1429; //3.txt 1276 1429.10
         //int threshold = 1265; //4.txt 1130 1265.60
         //int threshold = 1625; //5.txt 1451 1625.12 (1000/1000/0.9)
-        //int threshold = 1927; //6.txt 1721 1927.52  //TODO NOT ACHEIVED: 2220 1.5p
+        //int threshold = 1927; //6.txt 1721 1927.52  //TODO NOT ACHEIVED: 2164 1.5p
         int threshold = 1094; //7.txt 977 1094.24   //TODO NOT ACHEIVED 1180 1.5p
 
         // Generate birds
